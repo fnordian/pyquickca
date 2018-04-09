@@ -75,8 +75,8 @@ def generate_client_cert(ca_cert, ca_key, common_name, client_cert_file, client_
 
     client_cert.add_extensions([
         crypto.X509Extension(b"authorityKeyIdentifier", False, b"keyid:always", issuer=ca_cert),
-        crypto.X509Extension(b"extendedKeyUsage", False, b"clientAuth"),
-        crypto.X509Extension(b"keyUsage", False, b"digitalSignature"),
+        crypto.X509Extension(b"extendedKeyUsage", False, b"clientAuth, serverAuth"),
+        crypto.X509Extension(b"keyUsage", False, b"digitalSignature, keyEncipherment"),
     ])
 
     client_cert.gmtime_adj_notBefore(0)
