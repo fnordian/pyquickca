@@ -33,7 +33,7 @@ def generate_self_signed_ca(ca_cert_file: str, ca_key_file: str):
         crypto.X509Extension(b"authorityKeyIdentifier", False, b"keyid:always", issuer=ca)
     ])
 
-    ca.sign(k, b'sha1')
+    ca.sign(k, 'sha1')
 
     open(ca_cert_file, "wb").write(
         crypto.dump_certificate(crypto.FILETYPE_PEM, ca))
@@ -86,7 +86,7 @@ def generate_client_cert(ca_cert, ca_key, common_name, client_cert_file, client_
 
     client_cert.set_issuer(ca_cert.get_issuer())
     client_cert.set_pubkey(client_key)
-    client_cert.sign(ca_key, b'sha256')
+    client_cert.sign(ca_key, 'sha256')
 
     with open(client_cert_file, "wb") as f:
         f.write(crypto.dump_certificate(crypto.FILETYPE_PEM, client_cert))
